@@ -25,7 +25,7 @@ Blog.init(
       allowNull: false,
     },
     orig_post: {
-      type: DataTypes.LONGTEXT,
+      type: DataTypes.BLOB,
       allowNull: false,
     },
     comment_id: {
