@@ -1,0 +1,35 @@
+header, .blog:not(:last-child) {
+  border-bottom: 1px solid #ccc;
+}
+
+.no-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #1b89bc;
+  text-decoration: none;
+  font-size: 100%;
+}
+
+.no-button:hover {
+  color: #065b83;
+  text-decoration: underline;
+}
+
+.green {
+  background-color: #cce9cc;
+}
+
+.title-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-items {
+  font-size: 16 px;
+  }
+
+  .flex-row.justify-space-between > a {
+    margin-right: 35px;
+}

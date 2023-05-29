@@ -20,20 +20,17 @@ Blog.init(
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
-    creator_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    orig_post: {
-      type: DataTypes.BLOB,
-      allowNull: false,
-    },
-    comment_id: {
+    user_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
-        model: 'comment',
+        model: 'user',
         key: 'id',
-      },
+      }
+    },
+    post: {
+      type: DataTypes.TEXT,
+      allowNull: false,
     },
   },
   {
