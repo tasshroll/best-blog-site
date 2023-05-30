@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ['comment'],
+          attributes: ['content'],
         },
       ],
     });
@@ -38,6 +38,7 @@ router.get('/', async (req, res) => {
 //////////////////////////////////
 // GET A SINGLE BLOG BY ID
 router.get('/blog/:id', async (req, res) => {
+  console.log("GET A BLOG BY ID");
   try {
     const blogData = await Blog.findByPk(req.params.id, {
       include: [
@@ -45,10 +46,15 @@ router.get('/blog/:id', async (req, res) => {
           model: User,
           attributes: ['name'],
         },
+        {
+          model: Comment,
+          attributes: ['user_id', 'content', 'date_created', 'blog_id'],
+        },
       ],
     });
 
     const blog = blogData.get({ plain: true });
+
     console.log(blog);
     res.render('blog', {
       ...blog,
@@ -104,6 +110,7 @@ router.get('/login', (req, res) => {
     res.redirect('/homepage');
     return;
   }
+  console.log("User not logged in - doesn't exist in DB")
   res.render('login');
 });
 

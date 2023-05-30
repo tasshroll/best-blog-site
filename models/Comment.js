@@ -18,9 +18,9 @@ Comment.init(
         model: 'user',
         key: 'id'},
     },
-    comment: {
+    content: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     date_created: {
       type: DataTypes.DATE,

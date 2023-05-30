@@ -1,8 +1,8 @@
-const newFormHandler = async (event) => {
+const newBlogHandler = async (event) => {
   event.preventDefault();
 
   const title = document.querySelector('#project-name').value.trim();
-  const date_created = Date.now;
+  const date_created = Date.now();
   const post = document.querySelector('#project-desc').value.trim();
   console.log ("In profile.js and blog title  is ", title)
   console.log ("In profile.js and blog post content is ", post)
@@ -45,7 +45,7 @@ const delButtonHandler = async (event) => {
 
 document
   .querySelector('.new-project-form')
-  .addEventListener('submit', newFormHandler);
+  .addEventListener('submit', newBlogHandler);
 
 document
   .querySelector('.project-list')

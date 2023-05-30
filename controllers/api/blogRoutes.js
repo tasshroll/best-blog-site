@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Blog, Comment } = require('../../models');
+const { Blog, Comment, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // post - Create a  NEW BLOG
@@ -22,19 +22,27 @@ router.post('/', withAuth, async (req, res) => {
 
 
 
-
-// // post - Create a  comment on an BLOG
+// // post - Create a new comment on a BLOG
 router.post('/comment/:id', async (req, res) => {
+  const user_id = req.session.user_id;
+  const blogId = parseInt(req.params.id, 10);
 
-  console.log(`Inside blogRoutes POST to api/blogs/comment/:id for id = ${id})`);
+  console.log(`Inside blogRoutes POST to api/blogs/comment/:id })`);
   try {
+    console.log(req.body);
     const commentData = await Comment.create({
-      where: {
-        id: req.params.id,
-        user_id: req.session.user_id,
-      }})
-      console.log(res.commentData);
-      res.status(200).json(commentData);
+      ...req.body,
+      user_id,
+      blog_id
+    });
+    // where: {
+    //   id: req.params.id,
+    //   user_id: req.session.user_id,
+    // }})
+
+    console.log(commentData);
+    res.status(200).json(commentData);
+
 
   } catch (err) {
     console.log("Error posting comment");
