@@ -26,7 +26,7 @@ router.post('/', withAuth, async (req, res) => {
 // // post - Create a  comment on an BLOG
 router.post('/comment/:id', async (req, res) => {
 
-  console.log(`Inside blogRoutes POST to api/blogs/:id for id = ${id})`);
+  console.log(`Inside blogRoutes POST to api/blogs/comment/:id for id = ${id})`);
   try {
     const commentData = await Comment.create({
       where: {
