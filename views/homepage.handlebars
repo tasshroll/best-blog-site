@@ -1,3 +1,5 @@
+<!-- List all the Blogs in Database -->
+
 <!-- Loop over each object in the blog array -->
 {{#each blogs as |blog| }}
 {{!-- <div class="row mb-4 blog"> --}}
@@ -12,7 +14,7 @@
                             <a href="/blog/{{blog.id}}">{{blog.title}}</a>
                         </p>
                         <p class="metadata">
-                            Posted by {{blog.creator_name}} on {{format_date blog.date_created}}
+                            Posted by {{blog.user.name}} on {{format_date blog.date_created}}
                         </p>
                     </div>
                 </div>

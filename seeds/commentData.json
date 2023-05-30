@@ -1,0 +1,20 @@
+[
+    {
+      "user_id": 3,
+      "comment": "I really enjoyed this blog",
+      "date_created": "2023-05-25T00:18:19.000Z",
+      "blog_id": 1
+    },
+    {
+        "user_id": 1,
+        "comment": "This blog was helpful",
+        "date_created": "2023-03-02T00:18:19.000Z",
+        "blog_id": 2
+      },
+      {
+        "user_id": 2,
+        "comment": "Can't wait for next weeks blog.",
+        "date_created": "2023-05-28T00:18:19.000Z",
+        "blog_id": 4
+      }
+    ]

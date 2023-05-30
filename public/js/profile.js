@@ -1,21 +1,27 @@
 const newFormHandler = async (event) => {
   event.preventDefault();
 
-  const name = document.querySelector('#project-name').value.trim();
-  const description = document.querySelector('#project-desc').value.trim();
-
-  if (name && description) {
+  const title = document.querySelector('#project-name').value.trim();
+  const date_created = Date.now;
+  const post = document.querySelector('#project-desc').value.trim();
+  console.log ("In profile.js and blog title  is ", title)
+  console.log ("In profile.js and blog post content is ", post)
+ 
+  // Create new blog post with title, date_created, and post
+  if (title && post) {
     const response = await fetch(`/api/blogs`, {
       method: 'POST',
-      body: JSON.stringify({ name, description }),
+      body: JSON.stringify({ title, date_created, post }),
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
     if (response.ok) {
-      document.location.replace('/profile');
+      // list all the blogs including this new one at the bottom
+      document.location.replace('/');
     } else {
+      console.log(response.status);
       alert('Failed to create blog');
     }
   }

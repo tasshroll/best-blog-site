@@ -17,11 +17,11 @@
                     <nav class="display-inline  text-light nav-items">
                         <div class="flex-row justify-space-between ">
                             <a href="/">Home</a>
-                            <a href="/">Dashboard</a>
+                            <a href="/profile">Dashboard</a>
                             <!-- Conditionally render login or logout links -->
                             {{#if logged_in}}
                             <a  href="/profile">Logout</a> |
-                            <button class="no-button" id="logout">Logout</button>
+                            {{!-- <button class="no-button" id="logout">Logout</button> --}}
                             {{else}}
                             <a  href="/login">Login</a>
                             {{/if}}

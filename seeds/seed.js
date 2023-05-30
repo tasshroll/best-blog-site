@@ -3,6 +3,8 @@ const { User, Blog, Comment } = require('../models');
 
 const userData = require('./userData.json');
 const blogData = require('./blogData.json');
+const commentData = require('./commentData.json');
+
 
 const seedDatabase = async () => {
   // forces tables to sync with database
@@ -14,6 +16,9 @@ const seedDatabase = async () => {
   });
 
   const blog = await Blog.bulkCreate(blogData);
+
+  const comment = await Comment.bulkCreate(commentData);
+
 
   process.exit(0);
 };
