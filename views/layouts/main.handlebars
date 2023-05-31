@@ -16,14 +16,18 @@
                 <div class="bg-primary">
                     <nav class="display-inline  text-light nav-items">
                         <div class="flex-row justify-space-between ">
+
+                            {{!-- Display Nav Bar Items --}}
                             <a href="/">Home</a>
                             <a href="/profile">Dashboard</a>
+
                             <!-- Conditionally render login or logout links -->
                             {{#if logged_in}}
-                            {{!-- <a  href="/profile">Logout</a> | --}}
-                            <button class="no-button" id="logout">Logout</button>
+                            {{!-- <a href="/logout">Logout</a> --}}
+                            <a id="logout">Logout</a>
+
                             {{else}}
-                            <a  href="/login">Login</a>
+                            <a href="/login">Login</a>
                             {{/if}}
                         </div>
                     </nav>

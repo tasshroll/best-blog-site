@@ -2,9 +2,9 @@ const router = require('express').Router();
 const { User } = require('../../models');
 
 // CREATE A NEW USER IN DATABASE
+// route : POST api/users/
+// in login.js, signupFormHandler
 router.post('/', async (req, res) => {
-  console.log ("in .post route /");
-  console.log ("Creating new user in DB");
   try {
     const userData = await User.create(req.body);
 
@@ -15,13 +15,15 @@ router.post('/', async (req, res) => {
       res.status(200).json(userData);
     });
   } catch (err) {
-    console.log("Error creating new user");
     res.status(400).json(err);
   }
 });
 
-
+// VALIDATE EXISTING USER LOGIN
+// route : POST api/users/login
+// in login.js, loginFormHandler
 router.post('/login', async (req, res) => {
+  //console.log("In userRoutes -  /users/login");
   try {
     console.log ("in .post login route /login");
     console.log("LOGGING IN");
@@ -55,6 +57,9 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// LOGOUT  USER 
+// route POST api/users/logout
+// in logout.js
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {

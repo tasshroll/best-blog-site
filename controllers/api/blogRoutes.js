@@ -1,8 +1,10 @@
 const router = require('express').Router();
-const { Blog, Comment, User } = require('../../models');
+const { Blog, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-// post - Create a  NEW BLOG
+// Create a  NEW BLOG
+// route : POST api/blogs/
+// in profile.js, newBlogHandler
 router.post('/', withAuth, async (req, res) => {
 
   console.log("in api/blogs (blogRoutes) at post / Creating New Blog")
@@ -21,8 +23,9 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 
-
-// // post - Create a new comment on a BLOG
+// Create a  NEW COMMENT on a blog
+// route : POST api/blogs/comment/:id
+// in comment.js, newCommentHandler
 router.post('/comment/:id', async (req, res) => {
   const user_id = req.session.user_id;
   //const blogId = parseInt(req.params.id, 10);
@@ -49,8 +52,10 @@ router.post('/comment/:id', async (req, res) => {
 
 
 
-//router.delete('/:id', withAuth, async (req, res) => {
-router.delete('/:id', async (req, res) => {
+// DELETE a user blog
+// route : DELETE api/blogs/:id
+// in profile.js, delBlogHandler
+router.delete('/:id', withAuth, async (req, res) => {
 
   try {
     const blogData = await Blog.destroy({

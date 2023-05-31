@@ -5,6 +5,7 @@ const { Sequelize } = require('sequelize');
 
 //////////////////////////////////
 // GET ALL BLOGS IN DATABASE
+// 127.0.0.1:3001 from browser
 router.get('/', async (req, res) => {
   try {
     // Get all blogs and JOIN with user data and comment data
@@ -23,7 +24,6 @@ router.get('/', async (req, res) => {
 
     // Serialize data so the template can read it
     const blogs = blogData.map((blog) => blog.get({ plain: true }));
-    console.log(blogs);
 
     // Pass serialized data and session flag into template
     res.render('homepage', {
@@ -37,8 +37,9 @@ router.get('/', async (req, res) => {
 
 //////////////////////////////////
 // GET A SINGLE BLOG BY ID
+// 127.0.0.1:3001/# from homepage.handlebars when user selects from the list of blogs
 router.get('/blog/:id', withAuth, async (req, res) => {
-  console.log("GET A BLOG BY ID");
+  // console.log("GET A BLOG BY ID");
 
   // If the user is not logged in, redirect them to login
   if (!req.session.logged_in) {
@@ -75,10 +76,11 @@ router.get('/blog/:id', withAuth, async (req, res) => {
 
 //////////////////////////////////
 // GET USER PROFILE
-// withAuth middleware will prevent access to route
-// by confirming user session exists
+// withAuth middleware prevents access to route by confirming user session exists
+// 127.0.0.1:3001/profile 
+// from login.js and main.handlebars (dashboard)
 router.get('/profile', withAuth, async (req, res) => {
-  console.log(req.session);
+  //console.log(req.session);
   try {
     console.log("In profile route");
     // Find the logged in user based on the session ID
@@ -98,8 +100,7 @@ router.get('/profile', withAuth, async (req, res) => {
     // Extract the user's name from the first blog (it's the same for the remaining blogs)
     const userName = blogs.length > 0 ? blogs[0].user.name : '';
 
-    console.log(`Blogs written by ${userName} user are ${blogs}`);
-    console.log (blogs);
+    //console.log(`Blogs written by ${userName} user are ${blogs}`);
     res.render('profile', {
       blogs: blogs,
       userName: userName,
@@ -112,15 +113,16 @@ router.get('/profile', withAuth, async (req, res) => {
 });
 
 
-
-
+// route: api/login
+// from main.handlebars (dashboard)
+// redirects to homepage and to login.js -> api/users/login
 router.get('/login', (req, res) => {
+  console.log("in homeRoutes login");
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     res.redirect('/homepage');
     return;
   }
-  console.log("User not logged in - doesn't exist in DB")
   res.render('login');
 });
 

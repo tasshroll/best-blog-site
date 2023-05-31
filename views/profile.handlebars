@@ -1,28 +1,25 @@
+<!-- PROFILE Handlebar-->
 <div class="col-auto">
-  <h2>Welcome, {{userName}}!</h2>
+  <h1>Welcome {{userName}}!</h1>
 </div>
 <div class="flex-column">
-  <div class="row mt-4">
-
-
-
-    <!-- PROFILE - List BLOGS by current user logged in -->
-
+    <!-- List all BLOGS by current user logged in -->
     {{#if blogs.length}}
-    <div class="col-md-6 project-list">
+    <div class="col-md-6 project-list mt-2">
       <h3>Current Blogs you've written:</h3>
       <div>
         {{#each blogs as |blog|}}
         <div class="row mb-2">
           <div class="col-md-8">
             <p>
-              <a href="/blog/{{blog.id}}" class="text-dark">
+              <a href="/blog/{{blog.id}}" class="text-dark ml-2">
                 <strong>{{blog.title}}</strong>
                 <span class="small text-dark">written on {{ format_date blog.date_created}}</span>
               </a>
             </p>
           </div>
           <div class="col-md-4">
+            <!-- DELETE Button to remove a blog -->
             <button type="click" class="btn btn-sm btn-danger" data-id="{{blog.id}}">DELETE</button>
           </div>
         </div>
@@ -31,14 +28,12 @@
       </div>
     </div>
     {{/if}}
-
-  </div>
 </div>
 
 
-<!-- PROFILE - Create a NEW BLOG -->
+<!-- PROFILE - Allow user to Create a NEW BLOG -->
 
-<div class="col-md-6">
+<div class="col-md-5 mt-5">
   <h3>Create a New Blog:</h3>
 
   <form class="form new-project-form">

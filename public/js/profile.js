@@ -27,18 +27,18 @@ const newBlogHandler = async (event) => {
   }
 };
 
-const delButtonHandler = async (event) => {
+const delBlogHandler = async (event) => {
   if (event.target.hasAttribute('data-id')) {
     const id = event.target.getAttribute('data-id');
 
-    const response = await fetch(`/api/projects/${id}`, {
+    const response = await fetch(`/api/blogs/${id}`, {
       method: 'DELETE',
     });
 
     if (response.ok) {
       document.location.replace('/profile');
     } else {
-      alert('Failed to delete project');
+      alert('Failed to delete blog');
     }
   }
 };
@@ -49,4 +49,4 @@ document
 
 document
   .querySelector('.project-list')
-  .addEventListener('click', delButtonHandler);
+  .addEventListener('click', delBlogHandler);
