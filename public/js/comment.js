@@ -8,12 +8,11 @@ const newCommentHandler = async (event) => {
 
   if (content) {
 
-    //const response = await fetch(`/api/blogs/comment/${id}`, {
     // POST a new COMMENT
     console.log("POSTING TO /api/blogs with id");
-    // const response = await fetch(`/api/blogs/comment${id}`, {
-    const response = await fetch(`/api/blogs/comment`, {
 
+    const id = window.location.pathname.split("/").pop();
+    const response = await fetch(`/api/blogs/comment/${id}`, {
       method: 'POST',
       body: JSON.stringify({ content, date_created }),
       headers: {

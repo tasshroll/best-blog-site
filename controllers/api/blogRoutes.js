@@ -25,9 +25,11 @@ router.post('/', withAuth, async (req, res) => {
 // // post - Create a new comment on a BLOG
 router.post('/comment/:id', async (req, res) => {
   const user_id = req.session.user_id;
-  const blogId = parseInt(req.params.id, 10);
+  //const blogId = parseInt(req.params.id, 10);
+  const blog_id = req.params.id;
 
-  console.log(`Inside blogRoutes POST to api/blogs/comment/:id })`);
+  console.log ("blogId is ", blog_id);
+  console.log(`Inside blogRoutes POST to api/blogs/comment/:id }) where id = `, blog_id);
   try {
     console.log(req.body);
     const commentData = await Comment.create({
@@ -35,14 +37,9 @@ router.post('/comment/:id', async (req, res) => {
       user_id,
       blog_id
     });
-    // where: {
-    //   id: req.params.id,
-    //   user_id: req.session.user_id,
-    // }})
 
     console.log(commentData);
     res.status(200).json(commentData);
-
 
   } catch (err) {
     console.log("Error posting comment");

@@ -37,8 +37,15 @@ router.get('/', async (req, res) => {
 
 //////////////////////////////////
 // GET A SINGLE BLOG BY ID
-router.get('/blog/:id', async (req, res) => {
+router.get('/blog/:id', withAuth, async (req, res) => {
   console.log("GET A BLOG BY ID");
+
+  // If the user is not logged in, redirect them to login
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
+
   try {
     const blogData = await Blog.findByPk(req.params.id, {
       include: [
@@ -75,9 +82,11 @@ router.get('/profile', withAuth, async (req, res) => {
   try {
     console.log("In profile route");
     // Find the logged in user based on the session ID
+    const user_id = req.session.user_id;
+
     const blogData = await Blog.findAll({
       where: {
-        user_id: req.session.user_id
+        user_id
       },
       include: [
         { model: User },
@@ -89,10 +98,11 @@ router.get('/profile', withAuth, async (req, res) => {
     // Extract the user's name from the first blog (it's the same for the remaining blogs)
     const userName = blogs.length > 0 ? blogs[0].user.name : '';
 
-    console.log("Blogs for this user are ", blogs);
+    console.log(`Blogs written by ${userName} user are ${blogs}`);
+    console.log (blogs);
     res.render('profile', {
-      ...blogs,
-      userName,
+      blogs: blogs,
+      userName: userName,
       logged_in: true
     });
   } catch (err) {
