@@ -73,9 +73,6 @@ To run on command line do these steps:
 	* node server.js
 
 
-5. Test - Open insomnia to simulate the front-end. Insomnia is a open-source RESTful API client that allows developers to test and interact with APIs. It provides a user-friendly interface for sending HTTP requests. From insomnia, use the following endpoints to test
-
-
 ## User Story
 
 ```md

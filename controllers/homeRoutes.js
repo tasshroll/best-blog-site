@@ -8,6 +8,7 @@ const { Sequelize } = require('sequelize');
 // 127.0.0.1:3001 from browser
 router.get('/', async (req, res) => {
   try {
+    console.log("Request session logged in var is ", req.session.logged_in);
     // Get all blogs and JOIN with user data and comment data
     const blogData = await Blog.findAll({
       include: [

@@ -1,27 +1,30 @@
 <!-- List all the Blogs in Database -->
+Logged in: {{logged_in}}
 
 <!-- Loop over each object in the blog array -->
 {{#each blogs as |blog| }}
-    <div class="flex-row mb-4 blog">
+<div class="flex-row mb-4 blog">
 
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="title-container">
-                        <p class="text-light">
-                            <a href="/blog/{{blog.id}}">{{blog.title}}</a>
-                        </p>
-                        <p class="metadata">
-                            Posted by {{blog.user.name}} on {{format_date blog.date_created}}
-                        </p>
-                    </div>
-                </div>
-                <div class="card-body text-dark green">
-                    <p>
-                        {{blog.post}}
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="title-container">
+                    <p class="text-light">
+                        <a href="/blog/{{blog.id}}">{{blog.title}}</a>
+                    </p>
+                    <p class="metadata">
+                        Posted by {{blog.user.name}} on {{format_date blog.date_created}}
                     </p>
                 </div>
             </div>
+            <div class="card-body text-dark green">
+                {{#if logged_in }}
+                <p>
+                    {{ blog.post }}
+                </p>
+                {{/if}}
+            </div>
         </div>
     </div>
-    {{/each}}
+</div>
+{{/each}}
