@@ -14,6 +14,7 @@ https://github.com/tasshroll/best-blog-site
 
 # Heroku Deployed App
 
+https://best-tech-blog-app.herokuapp.com/
 
 
 # Screenshots
