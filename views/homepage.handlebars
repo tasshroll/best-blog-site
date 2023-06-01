@@ -18,7 +18,8 @@ Logged in: {{logged_in}}
                 </div>
             </div>
             <div class="card-body text-dark green">
-                {{#if logged_in }}
+                {{!-- {{#if logged_in }} --}}
+                {{#if ../logged_in}}
                 <p>
                     {{ blog.post }}
                 </p>
