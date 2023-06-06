@@ -44,6 +44,7 @@ const signupFormHandler = async (event) => {
   }
 };
 
+// Listen for Login Form or Signup Form submit
 document
   .querySelector('.login-form')
   .addEventListener('submit', loginFormHandler);

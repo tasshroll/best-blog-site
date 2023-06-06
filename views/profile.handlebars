@@ -37,9 +37,9 @@
 
 
 <!-- CREATE Button to write a new blog -->
-<div class="col-md-5 mt-5">
+<div class="col-md-10 mt-5">
   <div class="col-md-4">
-    <button type="click" id="NewBlog" class="btn btn-md newBlog" data-id="{{blog.id}}">Create a New Blog</button>
+    <button type="click" id="NewBlog" class="btn btn-md newBlog" data-id="{{blogs.id}}">Create a New Blog</button>
   </div>
 
 <!-- PROFILE - Allow user to Create a NEW BLOG -->
@@ -61,8 +61,8 @@
 </div>
 
 <!-- PROFILE - Allow user to Edit an existing BLOG -->
-<form class="form edit-project-form" style="display: none;">
-  <div class="form-group">
+<div class="form edit-project-form" style="display: none;">
+  <div class="form-group" id="edit-header">
     <h3>Edit a Blog:</h3>
 
     <label for="edit-title">Blog Title:</label>
@@ -70,19 +70,12 @@
   </div>
   <div class="form-group">
     <label for="edit-content">Blog Post:</label>
-    <textarea class="form-input" id="edit-content" name="edit-content"></textarea>
+    <textarea class="form-input" id="edit-content" name="edit-content" style="width: 1456px; height: 221px;"></textarea>
   </div>
   <div class="form-group">
-    <button type="submit" class="btn btn-primary update-blog">Update</button>
+    <button type="button" class="btn btn-primary update-blog" >Update</button>
   </div>
-</form>
-
-
-
-
-
-
-
+</div>
 
 
 

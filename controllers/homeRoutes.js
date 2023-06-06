@@ -8,7 +8,6 @@ const { Sequelize } = require('sequelize');
 // 127.0.0.1:3001 from browser
 router.get('/', async (req, res) => {
   try {
-    console.log("Request session logged in var is ", req.session.logged_in);
     // Get all blogs and JOIN with user data and comment data
     const blogData = await Blog.findAll({
       include: [
@@ -40,7 +39,6 @@ router.get('/', async (req, res) => {
 // GET A SINGLE BLOG BY ID
 // 127.0.0.1:3001/# from homepage.handlebars when user selects from the list of blogs
 router.get('/blog/:id', withAuth, async (req, res) => {
-  // console.log("GET A BLOG BY ID");
 
   // If the user is not logged in, redirect them to login
   if (!req.session.logged_in) {
@@ -81,9 +79,7 @@ router.get('/blog/:id', withAuth, async (req, res) => {
 // 127.0.0.1:3001/profile 
 // from login.js and main.handlebars (dashboard)
 router.get('/profile', withAuth, async (req, res) => {
-  //console.log(req.session);
   try {
-    console.log("In profile route");
     // Find the logged in user based on the session ID
     const user_id = req.session.user_id;
 
@@ -103,7 +99,7 @@ router.get('/profile', withAuth, async (req, res) => {
 
     //console.log(`Blogs written by ${userName} user are ${blogs}`);
     res.render('profile', {
-      blogs: blogs,
+      blogs,
       userName: userName,
       logged_in: true
     });
@@ -118,7 +114,6 @@ router.get('/profile', withAuth, async (req, res) => {
 // from main.handlebars (dashboard)
 // redirects to homepage and to login.js -> api/users/login
 router.get('/login', (req, res) => {
-  console.log("in homeRoutes login");
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     res.redirect('/homepage');

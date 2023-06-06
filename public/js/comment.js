@@ -6,8 +6,7 @@ const newCommentHandler = async (event) => {
 
   if (content) {
 
-    // POST a new COMMENT
-
+    // POST the new COMMENT
     const id = window.location.pathname.split("/").pop();
     const response = await fetch(`/api/blogs/comment/${id}`, {
       method: 'POST',
@@ -19,7 +18,6 @@ const newCommentHandler = async (event) => {
 
     if (response.ok) {
       // list all the blogs
-      //document.location.replace('/');
       location.reload();
     } else {
       console.log(response.status);
@@ -27,7 +25,6 @@ const newCommentHandler = async (event) => {
     }
   }
 };
-
 
 document
   .querySelector('.comment-form')

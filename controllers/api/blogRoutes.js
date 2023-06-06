@@ -25,19 +25,23 @@ router.post('/', withAuth, async (req, res) => {
 // Update an EXISTING BLOG
 // route : PUT api/blogs/ID
 // in profile.js, updateBlog
-router.put('/api/blogs/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
 
-  console.log("in api/blogs/id (blogRoutes) at put / Creating New Blog")
+  console.log(req.body)
   try {
     console.log(req.body);
-    const updateBlog = await Blog.update({
-      ...req.body,
-      user_id: req.session.user_id,
+    const updateBlog = await Blog.update(
+      req.body,
+       {
+      where: {
+        id: req.params.id
+      }
     });
     console.log(res.updateBlog);
 
     res.status(200).json(updateBlog);
   } catch (err) {
+    console.log(err);
     res.status(400).json(err);
   }
 });
@@ -62,7 +66,7 @@ router.post('/comment/:id', async (req, res) => {
   //const blogId = parseInt(req.params.id, 10);
   const blog_id = req.params.id;
 
-  console.log ("blogId is ", blog_id);
+  console.log("blogId is ", blog_id);
   console.log(`Inside blogRoutes POST to api/blogs/comment/:id }) where id = `, blog_id);
   try {
     console.log(req.body);

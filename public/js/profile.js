@@ -40,15 +40,19 @@ async function editBlog(blogId) {
 
   // Use the blogId, blogTitle, and blogPost for editing the blog
 
-  // Log the values to the console
-  console.log("Blog ID:", blogId);
-  console.log("Blog Title:", blogTitle);
-  console.log("Blog Post:", blogPost);
-
   // Pre-fill the form with the current blog data
   const editForm = document.querySelector('.edit-project-form');
   const editTitleInput = document.querySelector('#edit-title');
   const editContentInput = document.querySelector('#edit-content');
+  const editHeader = document.querySelector('#edit-header');
+
+  // create an element on HTML that holds the blogId so we can
+  // PUT to the update route in updateBlog
+  const inputEdit = document.createElement('input')
+  inputEdit.setAttribute('type', 'hidden')
+  inputEdit.setAttribute('value', blogId)
+  inputEdit.setAttribute('id', 'hidden-input')
+  editHeader.append(inputEdit)
 
   // Fill in the edit form with the blog data
   editTitleInput.value = blogTitle;
@@ -59,18 +63,15 @@ async function editBlog(blogId) {
 };
 
 // Function to update blog in database
-async function updateBlog(blogId) {
-  event.preventDefault();
-
+async function updateBlog() {
 
   const title = document.querySelector('#edit-title').value.trim();
   const date_created = Date.now();
   const post = document.querySelector('#edit-content').value.trim();
-
-  // Create new blog post with title, date_created, and post
+  const blogId = document.querySelector('#hidden-input').value
+  // Update the blog post info with title, date_created, and post
   if (title && post) {
-    console.log("Updating a blog WITH ID, ", blogId);
-    const response = await fetch(`/api/blogs/${blogId}`, {
+      const response = await fetch(`/api/blogs/${blogId}`, {
       method: 'PUT',
       body: JSON.stringify({ title, date_created, post }),
       headers: {
@@ -82,7 +83,6 @@ async function updateBlog(blogId) {
       // list all the blogs including this new one at the bottom
       document.location.replace('/');
     } else {
-      console.log(response.status);
       alert('Failed to update blog');
     }
   }
@@ -107,16 +107,15 @@ async function deleteBlog(blogId) {
 // Event handler for all the click events
 // in profile.handlebars
 function handleButtonClick(event) {
-  console.log("button clicked");
+
+  const blogId = event.target.getAttribute('data-id');
   // call deleteBlog if the clicked element has the class 'deleteBlog'
   if (event.target.classList.contains('deleteBlog')) {
-    const blogId = event.target.getAttribute('data-id');
     deleteBlog(blogId);
   }
 
   // call editBlog if the clicked element has the class 'editBlog'
   if (event.target.classList.contains('editBlog')) {
-    const blogId = event.target.getAttribute('data-id');
     editBlog(blogId);
   }
 
@@ -132,9 +131,7 @@ function handleButtonClick(event) {
 
   // call newBlog if the clicked element has the class 'update-blog'
   if (event.target.classList.contains('update-blog')) {
-    const blogId = event.target.getAttribute('data-id');
-    console.log("Calling updateBlog with id of ", blogId);
-    updateBlog(blogId);
+    updateBlog();
   }
 }
 
