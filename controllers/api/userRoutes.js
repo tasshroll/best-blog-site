@@ -23,10 +23,7 @@ router.post('/', async (req, res) => {
 // route : POST api/users/login
 // in login.js, loginFormHandler
 router.post('/login', async (req, res) => {
-  //console.log("In userRoutes -  /users/login");
   try {
-    console.log ("in .post login route /login");
-    console.log("LOGGING IN");
     const userData = await User.findOne({ where: { email: req.body.email } });
 
     if (!userData) {

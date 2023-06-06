@@ -1,6 +1,6 @@
 <!-- List all the Blogs in Database -->
 
-<!-- Loop over each object in the blog array -->
+<!-- Loop over each object in the blog array and display title on homepage -->
 {{#each blogs as |blog| }}
 <div class="flex-row mb-4 blog">
 
@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="card-body text-dark green">
-                {{!-- {{#if logged_in }} --}}
+                {{!-- If user is logged in, display the blog contents --}}
                 {{#if ../logged_in}}
                 <p>
                     {{ blog.post }}

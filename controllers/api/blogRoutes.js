@@ -22,6 +22,37 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+// Update an EXISTING BLOG
+// route : PUT api/blogs/ID
+// in profile.js, updateBlog
+router.put('/api/blogs/:id', async (req, res) => {
+
+  console.log("in api/blogs/id (blogRoutes) at put / Creating New Blog")
+  try {
+    console.log(req.body);
+    const updateBlog = await Blog.update({
+      ...req.body,
+      user_id: req.session.user_id,
+    });
+    console.log(res.updateBlog);
+
+    res.status(200).json(updateBlog);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Create a  NEW COMMENT on a blog
 // route : POST api/blogs/comment/:id

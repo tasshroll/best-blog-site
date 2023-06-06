@@ -21,7 +21,6 @@ const newCommentHandler = async (event) => {
       // list all the blogs
       //document.location.replace('/');
       location.reload();
-      console.log("POSTING NEW COMMENT SUCCESSFULL!");
     } else {
       console.log(response.status);
       alert('Failed to add comment');

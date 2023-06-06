@@ -3,41 +3,50 @@
   <h1>Welcome {{userName}}!</h1>
 </div>
 <div class="flex-column">
-    <!-- List all BLOGS by current user logged in -->
-    {{#if blogs.length}}
-    <div class="col-md-6 project-list mt-2">
-      <h3>Current Blogs you've written:</h3>
-      <div>
-        {{#each blogs as |blog|}}
-        <div class="row mb-2">
-          <div class="col-md-8">
-            <p>
-              <a href="/blog/{{blog.id}}" class="text-dark ml-2">
-                <strong>{{blog.title}}</strong>
-                <span class="small text-dark">written on {{ format_date blog.date_created}}</span>
-              </a>
-            </p>
-          </div>
-          <div class="col-md-4">
-            <!-- DELETE Button to remove a blog -->
-            <button type="click" class="btn btn-sm btn-danger" data-id="{{blog.id}}">DELETE</button>
-          </div>
+  <!-- List all BLOGS by current user logged in -->
+  {{#if blogs.length}}
+  <div class="col-md-6 project-list mt-2">
+    <h3>Current Blogs you've written:</h3>
+    <div>
+      {{#each blogs as |blog|}}
+      <div class="row mb-2">
+        <div class="col-md-8">
+          <p>
+            <a href="/blog/{{blog.id}}" class="text-dark ml-2 blog-title">
+              <strong>{{blog.title}}</strong>
+              {{!-- grab the blog content to have for editting --}}
+              <p class="blog-post">{{blog.post}}</p>
+              <span class="small text-dark">written on {{ format_date blog.date_created}}</span>
+            </a>
+          </p>
         </div>
-        {{/each}}
+        <div class="col-md-4">
+          <!-- DELETE Button to remove a blog -->
+          <button type="click" class="btn btn-sm btn-danger deleteBlog" data-id="{{blog.id}}">DELETE</button>
+          <!-- EDIT Button to update a blog -->
+          <button type="click" class="btn btn-sm editBlog" data-id="{{blog.id}}">EDIT</button>
 
+        </div>
       </div>
+      {{/each}}
+
     </div>
-    {{/if}}
+  </div>
+  {{/if}}
 </div>
 
 
-<!-- PROFILE - Allow user to Create a NEW BLOG -->
-
+<!-- CREATE Button to write a new blog -->
 <div class="col-md-5 mt-5">
-  <h3>Create a New Blog:</h3>
+  <div class="col-md-4">
+    <button type="click" id="NewBlog" class="btn btn-md newBlog" data-id="{{blog.id}}">Create a New Blog</button>
+  </div>
 
-  <form class="form new-project-form">
+<!-- PROFILE - Allow user to Create a NEW BLOG -->
+  <form class="form new-project-form" style="display: none;">
     <div class="form-group">
+      <h3>Create a New Blog:</h3>
+
       <label for="project-name">Blog Title:</label>
       <input class="form-input" type="text" id="project-name" name="project-name" />
     </div>
@@ -46,9 +55,35 @@
       <textarea class="form-input" id="project-desc" name="project-desc"></textarea>
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Create</button>
+      <button type="submit" class="btn btn-primary create-blog">Create</button>
     </div>
   </form>
 </div>
+
+<!-- PROFILE - Allow user to Edit an existing BLOG -->
+<form class="form edit-project-form" style="display: none;">
+  <div class="form-group">
+    <h3>Edit a Blog:</h3>
+
+    <label for="edit-title">Blog Title:</label>
+    <input class="form-input" type="text" id="edit-title" name="edit-title" />
+  </div>
+  <div class="form-group">
+    <label for="edit-content">Blog Post:</label>
+    <textarea class="form-input" id="edit-content" name="edit-content"></textarea>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary update-blog">Update</button>
+  </div>
+</form>
+
+
+
+
+
+
+
+
+
 
 <script src="./js/profile.js"></script>
