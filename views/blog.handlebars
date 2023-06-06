@@ -1,10 +1,10 @@
-
 {{!-- Display the blog that the user selected --}}
 <div class="text-center">
   <h2>{{title}}</h2>
   <p class="col-md-8 mx-auto">{{post}}</p>
-  <h5>Created by {{user.name}} on {{format_date date_created}}</h5>
-  <div class="mt-5">
+  {{!-- <h5>Blog Post Created by {{user.name}} on {{format_date date_created}}</h5> --}}
+   <h5>Blog Post Created by {{user.name}} on {{format_date date_created}}</h5>
+<div class="mt-5">
     <h3>Comments</h3>
   </div>
 
@@ -12,7 +12,7 @@
   {{#if comments.length }}
   {{#each comments}}
   <div>
-    <p>{{this.content}}</p>
+    <p>{{this.content}} Comment on {{format_date date_created}}</p> 
   </div>
   {{/each}}
   {{else}}

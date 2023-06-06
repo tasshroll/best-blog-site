@@ -7,14 +7,13 @@ const withAuth = require('../../utils/auth');
 // in profile.js, newBlogHandler
 router.post('/', withAuth, async (req, res) => {
 
-  console.log("in api/blogs (blogRoutes) at post / Creating New Blog")
+  // console.log("in api/blogs (blogRoutes) at post / Creating New Blog")
   try {
     console.log(req.body);
     const newBlog = await Blog.create({
       ...req.body,
       user_id: req.session.user_id,
     });
-    console.log(res.newBlog);
 
     res.status(200).json(newBlog);
   } catch (err) {
@@ -27,9 +26,7 @@ router.post('/', withAuth, async (req, res) => {
 // in profile.js, updateBlog
 router.put('/:id', async (req, res) => {
 
-  console.log(req.body)
   try {
-    console.log(req.body);
     const updateBlog = await Blog.update(
       req.body,
        {
@@ -37,7 +34,6 @@ router.put('/:id', async (req, res) => {
         id: req.params.id
       }
     });
-    console.log(res.updateBlog);
 
     res.status(200).json(updateBlog);
   } catch (err) {
@@ -47,44 +43,26 @@ router.put('/:id', async (req, res) => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
 // Create a  NEW COMMENT on a blog
 // route : POST api/blogs/comment/:id
 // in comment.js, newCommentHandler
 router.post('/comment/:id', async (req, res) => {
   const user_id = req.session.user_id;
-  //const blogId = parseInt(req.params.id, 10);
   const blog_id = req.params.id;
 
-  console.log("blogId is ", blog_id);
-  console.log(`Inside blogRoutes POST to api/blogs/comment/:id }) where id = `, blog_id);
   try {
-    console.log(req.body);
     const commentData = await Comment.create({
       ...req.body,
       user_id,
       blog_id
     });
 
-    console.log(commentData);
     res.status(200).json(commentData);
 
   } catch (err) {
-    console.log("Error posting comment");
     res.status(500).json(err);
   }
 });
-
 
 
 // DELETE a user blog
